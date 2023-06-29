@@ -1,10 +1,23 @@
 const express = require('express');
 const { sequelize, User, MagicCard } = require('./models');
+const { createUser } = require('./controllers/userController');
+const { createCard } = require('./controllers/cardController');
+const { getUsers } = require('./controllers/show-userController');
+const { getCardById, getCardByParams } = require('./controllers/show-cardController');
+
 
 const app = express();
 const port = 3000;
 
 // Middlewares, rotas e outras configurações do Express.js
+app.post('/addUsers', createUser);
+app.post('/addCards', createCard);
+app.get('/users', getUsers);
+app.get('/cards', getCardByParams);
+app.get('/cards/:id', getCardById);
+
+
+
 
 // Inicie o servidor
 app.listen(port, async () => {

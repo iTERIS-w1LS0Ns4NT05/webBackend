@@ -9,9 +9,12 @@ const { login } = require('./controllers/authController');
 const { installDatabase } = require('./controllers/databaseController');
 const { checkUserRole } = require('./middlewares/authUser');
 const { authToken } = require('./middlewares/authToken');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middlewares, rotas e outras configurações do Express.js
 app.get('/install/', installDatabase);
@@ -35,10 +38,6 @@ app.get('/cards/:cardId/collection', getCollection);
 app.post('/users/admin', checkUserRole, createAdminUser);
 app.post('/addUsers', createUser);
 app.post('/addCards', checkUserRole, createCard);
-
-
-
-
 
 // Inicie o servidor
 app.listen(port, async () => {

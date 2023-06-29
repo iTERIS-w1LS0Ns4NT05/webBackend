@@ -2,7 +2,7 @@ const express = require('express');
 const { sequelize, User, MagicCard } = require('./models');
 const { createUser, updatedUser } = require('./controllers/userController');
 const { createAdminUser, updateUser, deleteUser } = require('./controllers/adminController');
-const { createCard, updateCard, deleteCard } = require('./controllers/cardController');
+const { createCard, updateCard, deleteCard, getCollection } = require('./controllers/cardController');
 const { getUsers } = require('./controllers/show-userController');
 const { getCardById, getCardByParams } = require('./controllers/show-cardController');
 const { checkUserRole } = require('./middlewares/authUser');
@@ -27,6 +27,7 @@ app.put('/addUsers/:id', updatedUser);
 app.get('/users', getUsers);
 app.get('/cards', getCardByParams);
 app.get('/cards/:id', getCardById);
+app.get('/cards/:cardId/collection', getCollection);
 
 app.post('/users/admin', checkUserRole, createAdminUser);
 app.post('/addUsers', createUser);

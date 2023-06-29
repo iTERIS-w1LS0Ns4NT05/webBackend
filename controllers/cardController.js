@@ -1,5 +1,5 @@
-const { Card } = require('../models/magiccard');
-const { Collection } = require('../models/collection');
+const { Card } = require('../models');
+const { Collection } = require('../models');
 
 const createCard = async (req, res) => {
   try {

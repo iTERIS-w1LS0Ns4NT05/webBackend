@@ -1,4 +1,4 @@
-const { User } = require('../models/user');
+const { User } = require('../models');
 
 // Atualizar um usuário existente
 const updateUser = (req, res) => {

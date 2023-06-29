@@ -1,4 +1,4 @@
-const { User } = require('../models/user');
+const { User } = require('../models');
 
 const createUser = async (req, res) => {
   try {
@@ -7,7 +7,6 @@ const createUser = async (req, res) => {
     // Criação do usuário no banco de dados usando o modelo User
     const user = await User.create({
       name,
-      role: 'user',
       password,
       email,
       country,

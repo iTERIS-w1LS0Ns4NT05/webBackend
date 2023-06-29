@@ -1,4 +1,4 @@
-const { MagicCard } = require('../models/magiccard');
+const { MagicCard } = require('../models');
 
 const getCardById = async (req, res) => {
   try {

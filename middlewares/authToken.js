@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 const authToken = (req, res, next) => {
-  // Verificar se o token de autenticação está presente no cabeçalho da requisição
-  const token = req.headers.authorization;
+  // Verificar se o token de autenticação está presente no cookie
+  const token = req.cookies.token;
 
   if (!token) {
     return res.status(401).json({ message: 'Token de autenticação não fornecido' });
@@ -11,9 +11,9 @@ const authToken = (req, res, next) => {
   try {
     // Verificar se o token é válido
     const decodedToken = jwt.verify(token, 'chave_secreta');
-    
-    // Armazenar as informações do usuário no objeto da requisição para uso posterior
-    req.user = decodedToken;
+
+    // Armazenar o token no objeto de requisição para uso posterior
+    req.token = decodedToken;
 
     // Chamar a próxima função de middleware
     next();
@@ -23,4 +23,4 @@ const authToken = (req, res, next) => {
   }
 };
 
-module.exports = authToken;
+module.exports = { authToken };

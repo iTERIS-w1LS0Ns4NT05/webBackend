@@ -21,16 +21,12 @@ const getCardById = async (req, res) => {
 
 const getCardByParams = async (req, res) => {
   try {
-    const { type, name, collection } = req.query;
+    const { type, name, collection, limit = 10, page = 1 } = req.query;
 
-    // Verifique se há parâmetros de pesquisa
-    if (!type && !name && !collection) {
-      // Busque todas as cartas do banco de dados
-      const cards = await MagicCard.findAll();
-
-      // Envie uma resposta adequada para o cliente
-      return res.status(200).json(cards);
-    }
+    // Validar o valor de limite
+    const validLimits = [5, 10, 30];
+    const selectedLimit = parseInt(limit);
+    const effectiveLimit = validLimits.includes(selectedLimit) ? selectedLimit : 10;
 
     // Crie um objeto de consulta com base nos parâmetros recebidos
     const query = {};
@@ -44,8 +40,15 @@ const getCardByParams = async (req, res) => {
       query.collection = collection;
     }
 
-    // Busque as cartas no banco de dados com base nos parâmetros de pesquisa
-    const cards = await MagicCard.findAll({ where: query });
+    // Calcular o valor de deslocamento (offset) com base na página atual
+    const offset = (page - 1) * effectiveLimit;
+
+    // Busque as cartas no banco de dados com base nos parâmetros de pesquisa e paginacao
+    const cards = await MagicCard.findAll({
+      where: query,
+      limit: effectiveLimit,
+      offset: offset,
+    });
 
     // Envie uma resposta adequada para o cliente
     res.status(200).json(cards);
@@ -55,5 +58,4 @@ const getCardByParams = async (req, res) => {
   }
 };
 
-module.exports = { getCards, getCardById, getCardByParams };
-
+module.exports = { getCardById, getCardByParams };

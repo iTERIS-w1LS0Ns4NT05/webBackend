@@ -5,14 +5,17 @@ const { createAdminUser, updateUser, deleteUser } = require('./controllers/admin
 const { createCard, updateCard, deleteCard, getCollection } = require('./controllers/cardController');
 const { getUsers } = require('./controllers/show-userController');
 const { getCardById, getCardByParams } = require('./controllers/show-cardController');
-const { checkUserRole } = require('./middlewares/authUser');
 const { login } = require('./controllers/authController');
+const { installDatabase } = require('./controllers/databaseController');
+const { checkUserRole } = require('./middlewares/authUser');
 const { authToken } = require('./middlewares/authToken');
 
 const app = express();
 const port = 3000;
 
 // Middlewares, rotas e outras configurações do Express.js
+app.get('/install/', installDatabase);
+
 app.post('/', login);
 
 app.use(authToken);

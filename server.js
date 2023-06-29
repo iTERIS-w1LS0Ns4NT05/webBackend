@@ -6,6 +6,7 @@ const { createCard } = require('./controllers/cardController');
 const { getUsers } = require('./controllers/show-userController');
 const { getCardById, getCardByParams } = require('./controllers/show-cardController');
 const { checkUserRole } = require('./middlewares/authUser');
+const { login } = require('./controllers/authController');
 
 const app = express();
 const port = 3000;
@@ -13,6 +14,7 @@ const port = 3000;
 // Middlewares, rotas e outras configurações do Express.js
 app.put('/users/:id', checkUserRole, updateUser);
 app.delete('/users/:id', checkUserRole, deleteUser);
+app.post('/home', login);
 app.post('/users/admin', checkUserRole, createAdminUser);
 app.post('/addUsers', createUser);
 app.put('/addUsers/:id', updatedUser);

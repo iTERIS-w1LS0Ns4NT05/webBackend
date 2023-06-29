@@ -5,7 +5,7 @@ const { createUser, updatedUser } = require('./controllers/userController');
 const { createAdminUser, updateUser, deleteUser } = require('./controllers/adminController');
 const { createCard, updateCard, deleteCard, getCollection } = require('./controllers/cardController');
 const { getUsers } = require('./controllers/show-userController');
-const { getCardById, getCardByParams } = require('./controllers/show-cardController');
+const { getCardById, getCardByParams, getAllCards } = require('./controllers/show-cardController');
 const { login } = require('./controllers/authController');
 const { installDatabase } = require('./controllers/databaseController');
 const { checkUserRole } = require('./middlewares/authUser');
@@ -48,7 +48,18 @@ app.get('/registerScript.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'front', 'registerScript.js'));
 });
 
+
 app.use(authToken);
+
+// Rota para servir o arquivo register.html
+app.get('/cards', (req, res) => {
+    res.sendFile(path.join(__dirname, 'front', 'cards.html'));
+  });
+  
+// Rota para servir o arquivo registerScript.js
+app.get('/cards.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'front', 'cards.js'));
+});
 
 app.delete('/cards/:id', checkUserRole, deleteCard);
 app.delete('/users/:id', checkUserRole, deleteUser);
@@ -59,6 +70,7 @@ app.put('/addUsers/:id', updatedUser);
 
 app.get('/users', getUsers);
 app.get('/cards', getCardByParams);
+app.get('/cards/getAll', getAllCards);
 app.get('/cards/:id', getCardById);
 app.get('/cards/:cardId/collection', getCollection);
 

@@ -19,43 +19,65 @@ const getCardById = async (req, res) => {
   }
 };
 
-const getCardByParams = async (req, res) => {
+async function getAllCards(req, res) {
   try {
-    const { type, name, collection, limit = 10, page = 1 } = req.query;
+    const { limit: reqLimit = 10, page: reqPage = 1 } = req.query;
 
-    // Validar o valor de limite
     const validLimits = [5, 10, 30];
-    const selectedLimit = parseInt(limit);
-    const effectiveLimit = validLimits.includes(selectedLimit) ? selectedLimit : 10;
-
-    // Crie um objeto de consulta com base nos parâmetros recebidos
-    const query = {};
-    if (type) {
-      query.type = type;
-    }
-    if (name) {
-      query.name = name;
-    }
-    if (collection) {
-      query.collection = collection;
-    }
-
-    // Calcular o valor de deslocamento (offset) com base na página atual
+    const limit = parseInt(reqLimit);
+    const effectiveLimit = validLimits.includes(limit) ? limit : 10;
+    const page = parseInt(reqPage);
     const offset = (page - 1) * effectiveLimit;
 
-    // Busque as cartas no banco de dados com base nos parâmetros de pesquisa e paginacao
-    const cards = await MagicCard.findAll({
-      where: query,
+    const { count, rows: cards } = await MagicCard.findAndCountAll({
       limit: effectiveLimit,
       offset: offset,
     });
 
-    // Envie uma resposta adequada para o cliente
-    res.status(200).json(cards);
+    const totalPages = Math.ceil(count / effectiveLimit);
+
+    res.status(200).json({ cards, totalPages });
+  } catch (error) {
+    console.error('Erro ao buscar as cartas:', error);
+    res.status(500).json({ message: 'Erro ao buscar as cartas' });
+  }
+}
+
+const getCardByParams = async (req, res) => {
+  try {
+    const { type, name, collection, limit: reqLimit = 10, page: reqPage = 1 } = req.query;
+
+    const validLimits = [5, 10, 30];
+    const limit = parseInt(reqLimit);
+    const effectiveLimit = validLimits.includes(limit) ? limit : 10;
+    const page = parseInt(reqPage);
+    const offset = (page - 1) * effectiveLimit;
+
+    const whereCondition = {};
+
+    if (type) {
+      whereCondition.type = type;
+    }
+    if (name) {
+      whereCondition.name = name;
+    }
+    if (collection) {
+      whereCondition.collection = collection;
+    }
+
+    const { count, rows: cards } = await MagicCard.findAndCountAll({
+      where: whereCondition,
+      limit: effectiveLimit,
+      offset: offset,
+    });
+
+    const totalPages = Math.ceil(count / effectiveLimit);
+
+    res.status(200).json({ cards, totalPages });
   } catch (error) {
     console.error('Erro ao buscar cartas:', error);
     res.status(500).json({ message: 'Erro ao buscar cartas' });
   }
 };
 
-module.exports = { getCardById, getCardByParams };
+module.exports = { getCardById, getAllCards, getCardByParams };

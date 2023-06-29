@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>Lista de Cards</h1>
+
+  <div id="searchContainer">
+    <label for="type">Tipo:</label>
+    <input type="text" id="type" placeholder="Digite o tipo">
+
+    <label for="name">Nome:</label>
+    <input type="text" id="name" placeholder="Digite o nome">
+
+    <button onclick="searchCards()">Pesquisar</button>
+  </div>
+
+  <div id="paginationContainer">
+    <label for="perPage">Itens por página:</label>
+    <select id="perPage" onchange="changePerPage()">
+      <option value="5">5</option>
+      <option value="10" selected>10</option>
+      <option value="30">30</option>
+    </select>
+
+    <label for="currentPage">Página:</label>
+    <input type="number" id="currentPage" value="1" min="1" onchange="changePage()">
+
+    <span id="totalPages">/</span>
+  </div>
+
+  <div id="cardList"></div>
+
+  <script src="cards.js"></script>
+</body>
+</html>

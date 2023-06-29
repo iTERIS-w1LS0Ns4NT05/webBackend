@@ -9,7 +9,7 @@ module.exports = {
         type: 'Creature - Human Warrior',
         rarity: 'Common',
         color: 'Green',
-        collection: 'AFR',
+        collectionId: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -19,7 +19,7 @@ module.exports = {
           type: 'Creature - Goblin Rogue',
           rarity: 'Common',
           color: 'Black',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -29,7 +29,7 @@ module.exports = {
           type: 'Enchantment - Class',
           rarity: 'Uncommon',
           color: 'Blue',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -39,7 +39,7 @@ module.exports = {
           type: 'Land',
           rarity: 'Rare',
           color: 'Colorless',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -49,7 +49,7 @@ module.exports = {
           type: 'Enchantment',
           rarity: 'Uncommon',
           color: 'White',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -59,7 +59,7 @@ module.exports = {
           type: 'Enchantment',
           rarity: 'Rare',
           color: 'Red',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -69,7 +69,7 @@ module.exports = {
           type: 'Sorcery - Adventure',
           rarity: 'Common',
           color: 'Green',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -79,7 +79,7 @@ module.exports = {
           type: 'Legendary Creature - Elf Shaman',
           rarity: 'Rare',
           color: 'Red',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -89,7 +89,7 @@ module.exports = {
           type: 'Sorcery - Adventure',
           rarity: 'Common',
           color: 'Red',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -99,7 +99,7 @@ module.exports = {
           type: 'Artifact',
           rarity: 'Uncommon',
           color: 'Colorless',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -109,7 +109,7 @@ module.exports = {
           type: 'Creature - Human Bard',
           rarity: 'Common',
           color: 'White',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -119,7 +119,7 @@ module.exports = {
           type: 'Legendary Artifact',
           rarity: 'Mythic',
           color: 'Colorless',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -129,7 +129,7 @@ module.exports = {
           type: 'Creature - Human Ranger',
           rarity: 'Uncommon',
           color: 'Black',
-          collection: 'AFR',
+          collectionId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         }

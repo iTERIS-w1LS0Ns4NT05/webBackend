@@ -23,4 +23,4 @@ const createCard = async (req, res) => {
 };
 
 
-module.exports = { createUser };
+module.exports = { createCard };

@@ -1,16 +1,23 @@
 const express = require('express');
 const { sequelize, User, MagicCard } = require('./models');
-const { createUser } = require('./controllers/userController');
+const { createUser, updatedUser } = require('./controllers/userController');
+const { createAdminUser, updateUser, deleteUser } = require('./controllers/adminController');
 const { createCard } = require('./controllers/cardController');
 const { getUsers } = require('./controllers/show-userController');
 const { getCardById, getCardByParams } = require('./controllers/show-cardController');
 const { checkUserRole } = require('./middlewares/authUser');
+const { login } = require('./controllers/authController');
 
 const app = express();
 const port = 3000;
 
 // Middlewares, rotas e outras configurações do Express.js
-app.post('/addUsers', checkUserRole, createUser);
+app.put('/users/:id', checkUserRole, updateUser);
+app.delete('/users/:id', checkUserRole, deleteUser);
+app.post('/home', login);
+app.post('/users/admin', checkUserRole, createAdminUser);
+app.post('/addUsers', createUser);
+app.put('/addUsers/:id', updatedUser);
 app.post('/addCards', checkUserRole, createCard);
 app.get('/users', getUsers);
 app.get('/cards', getCardByParams);
